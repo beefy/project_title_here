@@ -2,7 +2,12 @@ const express = require('express')
 const app = express();
 const cors = require("cors");
 var http = require('http').Server(app);
-var io = require('socket.io')(http);
+var io = require('socket.io')(http, {
+  cors: {
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST"]
+  }
+});
 var package = require('../package.json');
 const path = require('path');
 const rateLimit = require('express-rate-limit')
@@ -53,7 +58,7 @@ io.on('connection', function (socket){
 });
 
 // serve client template
-app.use(express.static(path.join(__dirname, '/../client')));
+// app.use(express.static(path.join(__dirname, '/../client')));
 
 // this will be called regularly by a gcloud cron job
 app.get("/ttl", (req, res) => {
