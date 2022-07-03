@@ -1,3 +1,5 @@
+# Moved to https://github.com/textmmorpg
+
 # TextMMO
 MMO text adventure game using socket.io and mongodb
 
